@@ -756,6 +756,10 @@ template_file(
             "@glib_void_p@=4",
             "@glib_long@=4",
         ],
+        "@com_github_mjbots_bazel_deps//conditions:default" : [
+            "@glib_void_p@=8",
+            "@glib_long@=8",
+        ],
     }) + select({
         "@com_github_mjbots_bazel_deps//conditions:sizet_8bytes" : [
             "@glib_size_t@=8",
@@ -764,6 +768,10 @@ template_file(
         "@com_github_mjbots_bazel_deps//conditions:sizet_4bytes" : [
             "@glib_size_t@=4",
             "@glib_ssize_t@=4",
+        ],
+        "@com_github_mjbots_bazel_deps//conditions:default" : [
+            "@glib_size_t@=8",
+            "@glib_ssize_t@=8",
         ],
     }) + select({
         "@com_github_mjbots_bazel_deps//conditions:sizet_long" : [
@@ -781,6 +789,14 @@ template_file(
             "@gssize_modifier@=\"\"",
             "@gsize_format@=\"u\"",
             "@gssize_format@=\"i\"",
+        ],
+        "@com_github_mjbots_bazel_deps//conditions:default" : [
+            "@glib_size_type_define@=long",
+
+            "@gsize_modifier@=\"l\"",
+            "@gssize_modifier@=\"l\"",
+            "@gsize_format@=\"lu\"",
+            "@gssize_format@=\"li\"",
         ],
     }) + ['%s=%s' % (k, v) for k, v in BASE_SUBSTITUTIONS.items()],
 )
